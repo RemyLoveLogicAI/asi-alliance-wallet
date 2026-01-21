@@ -13,7 +13,7 @@
     "@keplr-wallet/simple-fetch": "0.12.12",
     "@keplr-wallet/stores": "0.12.12",
     "@keplr-wallet/types": "0.12.12",
-    "@keplr-wallet/wc-client": "0.12.12",
+    "@keplr-wallet/wc-client": "0.12.22",
     "@keplr-wallet/wc-qrcode-modal": "0.12.12",
     "@walletconnect/client": "^1.6.5",
     "@walletconnect/qrcode-modal": "^1.6.5",
