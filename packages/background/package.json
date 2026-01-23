@@ -57,7 +57,7 @@
     "@ledgerhq/hw-transport-webusb": "^6.20.0",
     "@noble/hashes": "1.0.0",
     "aes-js": "^3.1.2",
-    "axios": "^0.27.2",
+    "axios": "^1.12.0",
     "big-integer": "^1.6.48",
     "bip39": "^3.0.2",
     "buffer": "^6.0.3",
