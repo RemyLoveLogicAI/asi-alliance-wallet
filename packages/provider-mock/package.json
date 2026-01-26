@@ -16,10 +16,10 @@
     "lint-fix": "eslint --fix \"src/**/*\" && prettier --write \"src/**/*\""
   },
   "dependencies": {
-    "@keplr-wallet/cosmos": "0.12.12",
-    "@keplr-wallet/crypto": "0.12.12",
-    "@keplr-wallet/proto-types": "0.12.12",
-    "@keplr-wallet/provider": "0.12.12",
+    "@keplr-wallet/cosmos": "0.8.0",
+    "@keplr-wallet/crypto": "0.12.133",
+    "@keplr-wallet/proto-types": "0.10.1",
+    "@keplr-wallet/provider": "0.11.16",
     "@keplr-wallet/router": "0.12.12",
     "@keplr-wallet/types": "0.12.12",
     "buffer": "^6.0.3",
