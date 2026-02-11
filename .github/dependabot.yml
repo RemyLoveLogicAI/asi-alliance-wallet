@@ -1,6 +1,6 @@
 # Dependabot Configuration for ASI Alliance Wallet
 # PCI-DSS 6.2: Automated Security Patch Management
-# Last Updated: February 10, 2026
+# Last Updated: February 11, 2026
 
 version: 2
 
@@ -59,22 +59,19 @@ updates:
     # Version requirements
     versioning-strategy: "increase"
     
-    # Ignore specific dependencies (use with caution)
+    # SUPPLY CHAIN ATTACK PROTECTION
+    # Block suspicious version ranges based on supply chain attack investigation
     ignore:
-      # Example: Ignore major version updates for stable dependencies
-      # - dependency-name: "eslint"
-      #   update-types: ["version-update:semver-major"]
-      
-      # CRITICAL: Block axios 1.13.x due to supply chain attack
+      # CRITICAL: Block axios 1.13.x - 1.20.x due to supply chain attack
+      # Investigation: PRs #55 and #56 attempted to install non-existent axios 1.13.5
+      # Latest legitimate axios version: 1.7.9 (as of Feb 2026)
+      # Block entire suspicious range to prevent future attack vectors
       - dependency-name: "axios"
-        versions: ["1.13.x"]
-    
-    # Allow dependencies from specific registries only
-    registries:
-      npm-registry:
-        type: "npm-registry"
-        url: "https://registry.npmjs.org"
-        replaces-base: false
+        versions: ["1.13.x", "1.14.x", "1.15.x", "1.16.x", "1.17.x", "1.18.x", "1.19.x", "1.20.x"]
+      
+      # Block other suspicious high version numbers that don't exist
+      - dependency-name: "axios"
+        versions: [">= 2.0.0"]
 
   # ===========================================
   # NPM - Packages Directory
@@ -185,8 +182,10 @@ updates:
       include: "scope"
 
 # ===========================================
-# Registry Configuration
+# Registry Configuration (Global)
 # ===========================================
+# Only official npm registry is allowed
+# Prevents supply chain attacks via unofficial registries
 registries:
   npm-registry:
     type: npm-registry
@@ -217,8 +216,15 @@ registries:
 #
 # SUPPLY CHAIN PROTECTION:
 # - Only official npm registry allowed
-# - Blocked versions list maintained
+# - Blocked versions list maintained (axios 1.13.x - 1.20.x)
 # - SHA pinning for GitHub Actions
 # - Integrity verification required
+#
+# SUPPLY CHAIN ATTACK INVESTIGATION:
+# Date: February 10-11, 2026
+# Issue: PRs #55 and #56 attempted to install axios@1.13.5
+# Finding: axios 1.13.5 does NOT exist in npm registry
+# Action: Blocked entire suspicious version range (1.13.x - 1.20.x)
+# Reference: SECURITY_AUDIT_REPORT.md
 #
 # ===========================================
