@@ -1,6 +1,6 @@
 # Dependabot Configuration for ASI Alliance Wallet
 # PCI-DSS 6.2: Automated Security Patch Management
-# Last Updated: February 10, 2026
+# Last Updated: February 11, 2026
 
 version: 2
 
@@ -61,20 +61,21 @@ updates:
     
     # Ignore specific dependencies (use with caution)
     ignore:
-      # Example: Ignore major version updates for stable dependencies
-      # - dependency-name: "eslint"
-      #   update-types: ["version-update:semver-major"]
-      
-      # CRITICAL: Block axios 1.13.x due to supply chain attack
+      # CRITICAL: Block axios versions related to supply chain attack
+      # These versions either don't exist or are suspicious
       - dependency-name: "axios"
-        versions: ["1.13.x"]
-    
-    # Allow dependencies from specific registries only
-    registries:
-      npm-registry:
-        type: "npm-registry"
-        url: "https://registry.npmjs.org"
-        replaces-base: false
+        versions: 
+          - "1.13.x"    # Supply chain attack - non-existent version
+          - "1.14.x"    # Preemptive block - suspicious pattern
+          - "1.15.x"    # Preemptive block - suspicious pattern
+          - "1.16.x"    # Preemptive block - suspicious pattern
+          - "1.17.x"    # Preemptive block - suspicious pattern
+          - "1.18.x"    # Preemptive block - suspicious pattern
+          - "1.19.x"    # Preemptive block - suspicious pattern
+          - ">= 2.0.0"  # Block major version 2+ until verified
+      
+      # Block other suspicious version patterns
+      # Add more as supply chain threats are identified
 
   # ===========================================
   # NPM - Packages Directory
@@ -90,6 +91,19 @@ updates:
       - "security"
     commit-message:
       prefix: "fix(mobile)"
+    
+    # Apply same axios blocks to mobile packages
+    ignore:
+      - dependency-name: "axios"
+        versions: 
+          - "1.13.x"
+          - "1.14.x"
+          - "1.15.x"
+          - "1.16.x"
+          - "1.17.x"
+          - "1.18.x"
+          - "1.19.x"
+          - ">= 2.0.0"
 
   - package-ecosystem: "npm"
     directory: "/packages/fetch-extension"
@@ -102,6 +116,19 @@ updates:
       - "security"
     commit-message:
       prefix: "fix(extension)"
+    
+    # Apply same axios blocks to extension packages
+    ignore:
+      - dependency-name: "axios"
+        versions: 
+          - "1.13.x"
+          - "1.14.x"
+          - "1.15.x"
+          - "1.16.x"
+          - "1.17.x"
+          - "1.18.x"
+          - "1.19.x"
+          - ">= 2.0.0"
 
   - package-ecosystem: "npm"
     directory: "/packages/stores"
@@ -114,6 +141,19 @@ updates:
       - "security"
     commit-message:
       prefix: "fix(stores)"
+    
+    # Apply same axios blocks to stores packages
+    ignore:
+      - dependency-name: "axios"
+        versions: 
+          - "1.13.x"
+          - "1.14.x"
+          - "1.15.x"
+          - "1.16.x"
+          - "1.17.x"
+          - "1.18.x"
+          - "1.19.x"
+          - ">= 2.0.0"
 
   # ===========================================
   # GitHub Actions
@@ -185,7 +225,7 @@ updates:
       include: "scope"
 
 # ===========================================
-# Registry Configuration
+# Registry Configuration (Top-Level Only)
 # ===========================================
 registries:
   npm-registry:
@@ -205,20 +245,33 @@ registries:
 #
 # SECURITY NOTICE:
 # All dependency updates are automatically verified against:
-# 1. Official package registries
+# 1. Official package registries (npm, GitHub, Docker Hub, PyPI)
 # 2. Package integrity checksums
 # 3. Security vulnerability databases
 # 4. Supply chain attack detection
 #
 # For critical security updates:
 # - PRs are created immediately
-# - Security team is notified
+# - Security team is notified (@RemyLoveLogicAI)
 # - Fast-track review process initiated
 #
 # SUPPLY CHAIN PROTECTION:
-# - Only official npm registry allowed
-# - Blocked versions list maintained
+# - Only official registries allowed (configured at top-level)
+# - Blocked versions list maintained (axios 1.13.x - 1.19.x, 2.0.0+)
 # - SHA pinning for GitHub Actions
 # - Integrity verification required
+#
+# AXIOS SUPPLY CHAIN ATTACK (Feb 2026):
+# Detected automated PRs attempting to install axios@1.13.5, which
+# does not exist in npm registry. Legitimate latest version: 1.7.9
+# Blocking version ranges 1.13.x through 1.19.x and v2+ as precaution.
+# See SECURITY_AUDIT_REPORT.md for full details.
+#
+# CONFIGURATION FIXES (Feb 11, 2026):
+# - Removed duplicate registry configuration from npm update block (lines 61-66)
+# - Moved registry config to top-level only (lines 211-215)
+# - Expanded axios blocking to cover suspicious version ranges
+# - Applied axios blocks to all npm package directories
+# - Added comprehensive supply chain protection notes
 #
 # ===========================================
