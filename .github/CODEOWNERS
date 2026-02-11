@@ -1,1 +1,205 @@
-*       @agent-dominatrix @sh-wallet @AbbasAliLokhandwala
+# Code Owners for ASI Alliance Wallet
+# PCI-DSS 7.1: Access Control and Authorization
+# Last Updated: February 10, 2026
+#
+# This file defines code ownership and review requirements.
+# All changes to protected paths require approval from designated owners.
+#
+# Syntax: path/pattern @owner1 @owner2 @team
+#
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# ===========================================
+# DEFAULT OWNERS
+# ===========================================
+# These owners will be requested for review when someone opens a pull request.
+
+*       @RemyLoveLogicAI @agent-dominatrix @sh-wallet @AbbasAliLokhandwala
+
+# ===========================================
+# SECURITY-CRITICAL FILES
+# ===========================================
+# Require security team review for all security-related changes
+
+# Security policies and documentation
+SECURITY.md                     @RemyLoveLogicAI @agent-dominatrix
+SECURITY_AUDIT_REPORT.md        @RemyLoveLogicAI @agent-dominatrix
+.github/dependabot.yml          @RemyLoveLogicAI @agent-dominatrix
+.github/workflows/security*.yml @RemyLoveLogicAI @agent-dominatrix
+
+# Code owners file (this file)
+.github/CODEOWNERS              @RemyLoveLogicAI
+
+# ===========================================
+# CRYPTOGRAPHY & KEY MANAGEMENT
+# ===========================================
+# Critical: Changes affect wallet security and private key handling
+
+packages/crypto/**              @RemyLoveLogicAI @agent-dominatrix @sh-wallet
+packages/background/src/keyring/** @RemyLoveLogicAI @agent-dominatrix @sh-wallet
+packages/**/encryption/**       @RemyLoveLogicAI @agent-dominatrix
+
+# ===========================================
+# AUTHENTICATION & AUTHORIZATION
+# ===========================================
+# Changes affect user authentication and access control
+
+packages/background/src/auth/** @RemyLoveLogicAI @agent-dominatrix
+packages/**/permissions/**      @RemyLoveLogicAI @agent-dominatrix
+packages/**/session/**          @RemyLoveLogicAI @agent-dominatrix
+
+# ===========================================
+# BLOCKCHAIN TRANSACTION SIGNING
+# ===========================================
+# Critical: Changes affect transaction security
+
+packages/background/src/tx/**   @RemyLoveLogicAI @sh-wallet @AbbasAliLokhandwala
+packages/cosmos/src/tx/**       @RemyLoveLogicAI @sh-wallet @AbbasAliLokhandwala
+packages/**/signing/**          @RemyLoveLogicAI @sh-wallet
+
+# ===========================================
+# WALLET STORES & STATE MANAGEMENT
+# ===========================================
+# Manages sensitive wallet state
+
+packages/stores/src/**          @RemyLoveLogicAI @sh-wallet @AbbasAliLokhandwala
+packages/**/store/**            @RemyLoveLogicAI @sh-wallet
+
+# ===========================================
+# MOBILE APPLICATION
+# ===========================================
+# Mobile-specific security considerations
+
+packages/mobile/**              @RemyLoveLogicAI @sh-wallet @AbbasAliLokhandwala
+
+# ===========================================
+# BROWSER EXTENSION
+# ===========================================
+# Extension-specific security and permissions
+
+packages/fetch-extension/**     @RemyLoveLogicAI @agent-dominatrix @sh-wallet
+packages/extension-router/**   @RemyLoveLogicAI @agent-dominatrix
+
+# ===========================================
+# NETWORK & API COMMUNICATION
+# ===========================================
+# External communication and data fetching
+
+packages/background/src/chains-service/** @RemyLoveLogicAI @sh-wallet
+packages/**/api/**              @RemyLoveLogicAI @AbbasAliLokhandwala
+packages/**/network/**          @RemyLoveLogicAI @sh-wallet
+
+# ===========================================
+# BUILD & DEPLOYMENT
+# ===========================================
+# Infrastructure and build configuration
+
+.github/workflows/**            @RemyLoveLogicAI @agent-dominatrix
+Dockerfile                      @RemyLoveLogicAI
+docker/**                       @RemyLoveLogicAI
+scripts/**                      @RemyLoveLogicAI @AbbasAliLokhandwala
+
+# Build configuration
+package.json                    @RemyLoveLogicAI @AbbasAliLokhandwala
+package-lock.json               @RemyLoveLogicAI @AbbasAliLokhandwala
+yarn.lock                       @RemyLoveLogicAI @AbbasAliLokhandwala
+lerna.json                      @RemyLoveLogicAI @AbbasAliLokhandwala
+tsconfig*.json                  @RemyLoveLogicAI @AbbasAliLokhandwala
+
+# ===========================================
+# DEPENDENCIES
+# ===========================================
+# Require security review for dependency changes
+
+packages/*/package.json         @RemyLoveLogicAI @agent-dominatrix
+
+# ===========================================
+# TESTING
+# ===========================================
+# Test files require review from feature owners
+
+**/*.test.ts                    @sh-wallet @AbbasAliLokhandwala
+**/*.spec.ts                    @sh-wallet @AbbasAliLokhandwala
+**/__tests__/**                 @sh-wallet @AbbasAliLokhandwala
+
+# Security tests require security team review
+**/*.security.test.ts           @RemyLoveLogicAI @agent-dominatrix
+
+# ===========================================
+# DOCUMENTATION
+# ===========================================
+# Documentation changes
+
+*.md                            @RemyLoveLogicAI @AbbasAliLokhandwala
+docs/**                         @RemyLoveLogicAI @AbbasAliLokhandwala
+README.md                       @RemyLoveLogicAI
+CONTRIBUTING.md                 @RemyLoveLogicAI @AbbasAliLokhandwala
+
+# Compliance documentation (requires compliance officer approval)
+COMPLIANCE.md                   @RemyLoveLogicAI
+docs/compliance/**              @RemyLoveLogicAI
+
+# ===========================================
+# LEGAL & COMPLIANCE
+# ===========================================
+# Legal documents require legal review
+
+LICENSE                         @RemyLoveLogicAI
+CODE_OF_CONDUCT.md              @RemyLoveLogicAI
+PRIVACY_POLICY.md               @RemyLoveLogicAI
+
+# ===========================================
+# EMERGENCY CONTACTS
+# ===========================================
+#
+# For security emergencies:
+# - Primary: @RemyLoveLogicAI
+# - Secondary: @agent-dominatrix
+# - Email: security@fetch.ai
+# - Emergency: PagerDuty (authorized personnel)
+#
+# For general questions:
+# - Technical Lead: @sh-wallet
+# - Backend Lead: @AbbasAliLokhandwala
+# - Community: Discord/Telegram
+#
+# Escalation Path:
+# 1. GitHub PR review request
+# 2. Direct mention in PR comments
+# 3. Email to team
+# 4. PagerDuty (critical issues only)
+#
+# ===========================================
+# ACCESS CONTROL POLICY
+# ===========================================
+#
+# Review Requirements:
+# - All PRs require at least 1 approval from CODEOWNERS
+# - Security-critical changes require 2 approvals
+# - Dependency changes require security team review
+# - Breaking changes require all maintainer approval
+#
+# Protection Rules:
+# - Main branch: Protected, requires reviews
+# - Release branches: Protected, signed commits required
+# - Security branches: Protected, security team only
+#
+# Least Privilege:
+# - Read access: All contributors
+# - Write access: Core team only
+# - Admin access: Repository owner only
+# - Security admin: Security team lead
+#
+# Access Review:
+# - Quarterly access review required
+# - Inactive accounts removed after 90 days
+# - Emergency access revocation procedure documented
+# - Audit trail maintained for all access changes
+#
+# Compliance:
+# - PCI-DSS 7.1: Access control implementation
+# - PCI-DSS 7.2: Least privilege enforcement
+# - PCI-DSS 8.1: User identification
+# - PCI-DSS 8.2: Authentication mechanisms
+#
+# ===========================================
