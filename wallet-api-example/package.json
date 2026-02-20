@@ -52,6 +52,6 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "ts-proto": "^1.157.0",
-    "zx": "^7.2.3"
+    "zx": "^8.8.5"
   }
 }
