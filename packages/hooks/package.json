@@ -28,10 +28,10 @@
     "@keplr-wallet/stores-etc": "0.12.12",
     "@keplr-wallet/types": "0.12.12",
     "@keplr-wallet/unit": "0.12.12",
-    "axios": "^0.27.2",
+    "axios": "^1.13.5",
     "buffer": "^6.0.3",
     "long": "^4.0.0",
-    "react-router": "^6.8.1",
+    "react-router": "^7.13.0",
     "utility-types": "^3.10.0"
   },
   "peerDependencies": {
