@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@keplr-wallet/crypto": "0.12.12",
-    "@keplr-wallet/types": "0.12.12",
+    "@keplr-wallet/types": "0.12.0",
     "buffer": "^6.0.3",
     "delay": "^4.4.0",
     "mobx": "^6.1.7"
