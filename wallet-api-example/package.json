@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ethersproject/address": "^5.7.0",
-    "@keplr-wallet/common": "^0.12.96",
+    "@keplr-wallet/common": "^0.12.287",
     "@keplr-wallet/cosmos": "^0.12.96",
     "@keplr-wallet/provider-extension": "^0.12.96",
     "@keplr-wallet/types": "^0.12.96",
