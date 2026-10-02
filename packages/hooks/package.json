@@ -28,7 +28,7 @@
     "@keplr-wallet/stores-etc": "0.12.12",
     "@keplr-wallet/types": "0.12.12",
     "@keplr-wallet/unit": "0.12.12",
-    "axios": "^1.13.6",
+    "axios": "^0.34.0",
     "buffer": "^6.0.3",
     "long": "^4.0.0",
     "react-router": "^7.13.1",
